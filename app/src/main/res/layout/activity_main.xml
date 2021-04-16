@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SHARED JOBS"
+            android:text="@string/shared_jobs"
             android:textSize="25sp"
             android:gravity="center_horizontal"
             android:padding="5dp"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Nome"
+            android:hint="@string/nome"
             android:padding="5dp"
             android:layout_margin="5dp"/>
         <EditText
@@ -169,7 +169,7 @@
             android:padding="5dp"
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/anoConclusãoEt"
+            android:id="@+id/anoConclusaoEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

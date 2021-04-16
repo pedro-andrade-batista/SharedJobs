@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Shared Jobs</string>
+    <string name="shared_jobs">SHARED JOBS</string>
+    <string name="nome">Nome</string>
     <string-array name="formacao">
         <item>Fundamental</item>
         <item>Médio</item>

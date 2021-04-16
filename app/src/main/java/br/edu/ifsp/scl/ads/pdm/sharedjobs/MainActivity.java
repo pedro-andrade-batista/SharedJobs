@@ -17,46 +17,30 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import br.edu.ifsp.scl.ads.pdm.sharedjobs.databinding.ActivityMainBinding;
+
+import static br.edu.ifsp.scl.ads.pdm.sharedjobs.R.id.femininoRb;
+import static br.edu.ifsp.scl.ads.pdm.sharedjobs.R.id.masculinoRb;
+
 public class MainActivity extends AppCompatActivity {
 
-    private EditText nomeEt;
-    private EditText emailEt;
-    private EditText telefoneEt;
-    private EditText telefoneCelularEt;
-    private EditText dataNascimentoEt;
-    private EditText anoFormaturaEt;
-    private EditText anoConclusaoEt;
-    private EditText instituicaoEt;
-    private EditText tituloMonografiaEt;
-    private EditText orientadorEt;
-    private EditText vagaInteresseEt;
-    private CheckBox emailCb;
-    private CheckBox addTelefoneCb;
-    private LinearLayout tipoTelefoneLl;
-    private LinearLayout telefoneCelularLl;
-    private RadioGroup tipoTelefoneRg;
-    private RadioGroup sexoRg;
-    private RadioButton telefoneResidencialRb;
-    private RadioButton telefoneComercialRb;
-    private RadioButton masculinoRb;
-    private RadioButton femininoRb;
-    private Spinner formacaoSp;
-    private Button salvarBt;
-    private Button limparBt;
 
     private String phone;
     private String gender;
     private String typeOfPhone;
 
 
+    private ActivityMainBinding activityMainBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
 
-        bindViews();
+        //bindViews();
 
-        telefoneEt.addTextChangedListener(new TextWatcher() {
+        activityMainBinding.telefoneEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -66,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     makeVisibleTypeOfPhone(View.GONE);
                 else{
                     makeVisibleTypeOfPhone(View.VISIBLE);
-                    phone = telefoneCelularEt.getText().toString() + s;
+                    phone = activityMainBinding.telefoneCelularEt.getText().toString() + s;
                 }
                     
             }
@@ -76,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        formacaoSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        activityMainBinding.formacaoSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = (String) ((TextView) view).getText();
@@ -101,30 +85,27 @@ public class MainActivity extends AppCompatActivity {
     private void showFieldsForMestradoOrDoutorado() {
         cleanAllFieldsOfSpinner();
         showFieldsForGraduacaoOrEspecializacao();
-        orientadorEt.setVisibility(View.VISIBLE);
-        tituloMonografiaEt.setVisibility(View.VISIBLE);
+        activityMainBinding.orientadorEt.setVisibility(View.VISIBLE);
+        activityMainBinding.tituloMonografiaEt.setVisibility(View.VISIBLE);
     }
 
     private void showFieldsForGraduacaoOrEspecializacao() {
         cleanAllFieldsOfSpinner();
-        anoFormaturaEt.setVisibility(View.GONE);
-        anoConclusaoEt.setVisibility(View.VISIBLE);
-        instituicaoEt.setVisibility(View.VISIBLE);
-
-
+        activityMainBinding.anoFormaturaEt.setVisibility(View.GONE);
+        activityMainBinding.anoConclusaoEt.setVisibility(View.VISIBLE);
+        activityMainBinding.instituicaoEt.setVisibility(View.VISIBLE);
     }
-
     private void showFieldsForMedioOrFundamental() {
         cleanAllFieldsOfSpinner();
-        anoFormaturaEt.setVisibility(View.VISIBLE);
-        anoConclusaoEt.setVisibility(View.GONE);
-        instituicaoEt.setVisibility(View.GONE);
-        tituloMonografiaEt.setVisibility(View.GONE);
-        orientadorEt.setVisibility(View.GONE);
+        activityMainBinding.anoFormaturaEt.setVisibility(View.VISIBLE);
+        activityMainBinding.anoConclusaoEt.setVisibility(View.GONE);
+        activityMainBinding.instituicaoEt.setVisibility(View.GONE);
+        activityMainBinding.tituloMonografiaEt.setVisibility(View.GONE);
+        activityMainBinding.orientadorEt.setVisibility(View.GONE);
     }
 
     private void makeVisibleTypeOfPhone(int visible) {
-        tipoTelefoneLl.setVisibility(visible);
+        activityMainBinding.tipoTelefoneLl.setVisibility(visible);
     }
 
     public void onClickButton(View view){
@@ -142,42 +123,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cleanForm() {
-        nomeEt.setText("");
-        emailEt.setText("");
-        emailCb.setChecked(false);
-        telefoneEt.setText("");
-        addTelefoneCb.setChecked(false);
-        telefoneCelularLl.setVisibility(View.GONE);
-        telefoneCelularEt.setText("");
-        masculinoRb.setChecked(true);
-        dataNascimentoEt.setText("");
+        activityMainBinding.nomeEt.setText("");
+        activityMainBinding.emailEt.setText("");
+        activityMainBinding.emailCb.setChecked(false);
+        activityMainBinding.telefoneEt.setText("");
+        activityMainBinding.addTelefoneCb.setChecked(false);
+        activityMainBinding.telefoneCelularLl.setVisibility(View.GONE);
+        activityMainBinding.telefoneCelularEt.setText("");
+        activityMainBinding.masculinoRb.setChecked(true);
+        activityMainBinding.dataNascimentoEt.setText("");
         cleanAllFieldsOfSpinner();
-        vagaInteresseEt.setText("");
+        activityMainBinding.vagaInteresseEt.setText("");
 
     }
 
     public void isCheckedAddCellPhone(View view){
-        if(addTelefoneCb.isChecked())
-            telefoneCelularLl.setVisibility(View.VISIBLE);
+        if(activityMainBinding.addTelefoneCb.isChecked())
+            activityMainBinding.telefoneCelularLl.setVisibility(View.VISIBLE);
         else{
-            telefoneCelularLl.setVisibility(View.GONE);
-            telefoneCelularEt.setText("");
+            activityMainBinding.telefoneCelularLl.setVisibility(View.GONE);
+            activityMainBinding.telefoneCelularEt.setText("");
         }
     }
 
     private void getGender(){
-       switch(sexoRg.getCheckedRadioButtonId()){
-           case R.id.masculinoRb:
+       switch(activityMainBinding.sexoRg.getCheckedRadioButtonId()){
+           case masculinoRb:
                 gender = "Masculino";
                 break;
-           case R.id.femininoRb:
+           case femininoRb:
                gender = "Feminino";
                break;
        }
     }
 
     private void getTypeOfPhone(){
-        switch (tipoTelefoneRg.getCheckedRadioButtonId()){
+        switch (activityMainBinding.tipoTelefoneRg.getCheckedRadioButtonId()){
             case R.id.telefoneResidencialRb:
                 typeOfPhone = "Residencial";
                 break;
@@ -189,72 +170,46 @@ public class MainActivity extends AppCompatActivity {
 
     private String getMessageOfSpinner(){
         StringBuilder messageSpinner = new StringBuilder();
-        if(!(anoFormaturaEt.getText().toString().equals("")))
-            messageSpinner.append("Ano da formatura: ").append(anoFormaturaEt.getText()).append("\n");
-        if(!(anoConclusaoEt.getText().toString().equals("")))
-            messageSpinner.append("Ano da conclusao: ").append(anoConclusaoEt.getText()).append("\n");
-        if(!(instituicaoEt.getText().toString().equals("")))
-            messageSpinner.append("Instituição: ").append(instituicaoEt.getText()).append("\n");
-        if(!(tituloMonografiaEt.getText().toString().equals("")))
-            messageSpinner.append("Titulo da monografia: ").append(tituloMonografiaEt.getText()).append("\n");
-        if(!(orientadorEt.getText().toString().equals("")))
-            messageSpinner.append("Orientador: ").append(orientadorEt.getText()).append("\n");
+        if(!(activityMainBinding.anoFormaturaEt.getText().toString().equals("")))
+            messageSpinner.append("Ano da formatura: ").append(activityMainBinding.anoFormaturaEt.getText()).append("\n");
+        if(!(activityMainBinding.anoConclusaoEt.getText().toString().equals("")))
+            messageSpinner.append("Ano da conclusao: ").append(activityMainBinding.anoConclusaoEt.getText()).append("\n");
+        if(!(activityMainBinding.instituicaoEt.getText().toString().equals("")))
+            messageSpinner.append("Instituição: ").append(activityMainBinding.instituicaoEt.getText()).append("\n");
+        if(!(activityMainBinding.tituloMonografiaEt.getText().toString().equals("")))
+            messageSpinner.append("Titulo da monografia: ").append(activityMainBinding.tituloMonografiaEt.getText()).append("\n");
+        if(!(activityMainBinding.orientadorEt.getText().toString().equals("")))
+            messageSpinner.append("Orientador: ").append(activityMainBinding.orientadorEt.getText()).append("\n");
 
         return String.valueOf(messageSpinner);
     }
 
     private void cleanAllFieldsOfSpinner(){
-        anoFormaturaEt.setText("");
-        anoConclusaoEt.setText("");
-        instituicaoEt.setText("");
-        tituloMonografiaEt.setText("");
-        orientadorEt.setText("");
+        activityMainBinding.anoFormaturaEt.setText("");
+        activityMainBinding.anoConclusaoEt.setText("");
+        activityMainBinding.instituicaoEt.setText("");
+        activityMainBinding.tituloMonografiaEt.setText("");
+        activityMainBinding.orientadorEt.setText("");
     }
 
     private void saveForm(){
-        boolean checkboxEmail = emailCb.isChecked();
+        boolean checkboxEmail = activityMainBinding.emailCb.isChecked();
         String moreEmails = checkboxEmail ? "Sim" : "Não";
         getTypeOfPhone();
         StringBuilder message = new StringBuilder();
-        message.append("Nome: ").append(nomeEt.getText()).append("\n");
-        message.append("E-mail: ").append(emailEt.getText()).append("\n");
+        message.append("Nome: ").append(activityMainBinding.nomeEt.getText()).append("\n");
+        message.append("E-mail: ").append(activityMainBinding.emailEt.getText()).append("\n");
         message.append("Deseja receber mais E-mails: ").append(moreEmails).append("\n");
         message.append("Telefone ").append(typeOfPhone).append(": ").append(phone).append("\n");
-        if(addTelefoneCb.isChecked())
-            message.append("Celular: ").append(telefoneCelularEt.getText()).append("\n");
+        if(activityMainBinding.addTelefoneCb.isChecked())
+            message.append("Celular: ").append(activityMainBinding.telefoneCelularEt.getText()).append("\n");
         getGender();
         message.append("Sexo: ").append(gender).append("\n");
-        message.append("Data de nascimento: ").append(dataNascimentoEt.getText()).append("\n");
+        message.append("Data de nascimento: ").append(activityMainBinding.dataNascimentoEt.getText()).append("\n");
         String messageSpinner = getMessageOfSpinner();
         message.append(messageSpinner).append("\n");
-        message.append("Vaga de interesse: ").append(vagaInteresseEt.getText()).append("\n");
+        message.append("Vaga de interesse: ").append(activityMainBinding.vagaInteresseEt.getText()).append("\n");
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void bindViews(){
-        nomeEt = findViewById(R.id.nomeEt);
-        emailEt = findViewById(R.id.emailEt);
-        telefoneEt = findViewById(R.id.telefoneEt);
-        telefoneCelularEt = findViewById(R.id.telefoneCelularEt);
-        dataNascimentoEt = findViewById(R.id.dataNascimentoEt);
-        anoFormaturaEt = findViewById(R.id.anoFormaturaEt);
-        anoConclusaoEt = findViewById(R.id.anoConclusãoEt);
-        instituicaoEt = findViewById(R.id.instituicaoEt);
-        tituloMonografiaEt = findViewById(R.id.tituloMonografiaEt);
-        orientadorEt = findViewById(R.id.orientadorEt);
-        vagaInteresseEt = findViewById(R.id.vagaInteresseEt);
-        emailCb = findViewById(R.id.emailCb);
-        addTelefoneCb = findViewById(R.id.addTelefoneCb);
-        tipoTelefoneLl = findViewById(R.id.tipoTelefoneLl);
-        telefoneCelularLl = findViewById(R.id.telefoneCelularLl);
-        tipoTelefoneRg = findViewById(R.id.tipoTelefoneRg);
-        sexoRg = findViewById(R.id.sexoRg);
-        telefoneResidencialRb = findViewById(R.id.telefoneResidencialRb);
-        telefoneComercialRb = findViewById(R.id.telefoneComercialRb);
-        masculinoRb = findViewById(R.id.masculinoRb);
-        femininoRb = findViewById(R.id.femininoRb);
-        formacaoSp = findViewById(R.id.formacaoSp);
-        salvarBt = findViewById(R.id.salvarBt);
-        limparBt = findViewById(R.id.limparBt);
-    }
 }
